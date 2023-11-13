@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../models/User';
+
 import { jwtDecode } from 'jwt-decode';
 import { shareReplay } from 'rxjs/operators';
 

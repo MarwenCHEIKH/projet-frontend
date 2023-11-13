@@ -36,21 +36,17 @@ export class DeleteVfdComponent {
   }
   onSubmit() {
     this.deleteDirectoryForm.get('dir_path')?.setValue(this.selectedDirectory);
-    if (this.deleteDirectoryForm.valid) {
-      const formData = this.deleteDirectoryForm.value;
-      console.log(formData);
-      const token = localStorage.getItem('jwt_token');
+    const formData = this.deleteDirectoryForm.value;
 
-      this.httpService.post(formData, 'vfd/delete-directory').subscribe(
-        (response) => {
-          // Handle the successful response here
-          console.log('Success:', response);
-        },
-        (error) => {
-          // Handle the error here
-          console.error('Error:', error);
-        }
-      );
-    }
+    this.httpService.post(formData, 'vfd/delete-directory').subscribe(
+      (response) => {
+        // Handle the successful response here
+        console.log('Success:', response);
+      },
+      (error) => {
+        // Handle the error here
+        console.error('Error:', error);
+      }
+    );
   }
 }

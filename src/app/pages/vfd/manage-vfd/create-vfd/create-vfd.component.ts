@@ -25,24 +25,18 @@ export class CreateVfdComponent {
     });
   }
   onSubmit() {
-    // Handle form submission here
-    if (this.directoryForm.valid) {
-      const formData = this.directoryForm.value;
-      // Send the formData to the backend using a service or HttpClient
+    // Send the formData to the backend using a service or HttpClient
+    const directoryData = this.directoryForm.value;
 
-      const directoryData = this.directoryForm.value;
-      const token = localStorage.getItem('jwt_token');
-
-      this.httpService.post(directoryData, 'vfd/create-directory').subscribe(
-        (response) => {
-          // Handle the successful response here
-          console.log('Success:', response);
-        },
-        (error) => {
-          // Handle the error here
-          console.error('Error:', error);
-        }
-      );
-    }
+    this.httpService.post(directoryData, 'vfd/create-directory').subscribe(
+      (response) => {
+        // Handle the successful response here
+        console.log('Success:', response);
+      },
+      (error) => {
+        // Handle the error here
+        console.error('Error:', error);
+      }
+    );
   }
 }

@@ -48,25 +48,21 @@ export class UpdateVfdComponent {
   onSubmit() {
     this.updateDirectoryForm.get('dir_path')?.setValue(this.selectedDirectory);
     // Handle form submission here
-    if (this.updateDirectoryForm.valid) {
-      const formData = {
-        dir_path: this.selectedDirectory,
-        ...this.updateDirectoryForm.value,
-      };
-      console.log(formData);
 
-      const token = localStorage.getItem('jwt_token');
+    const formData = {
+      dir_path: this.selectedDirectory,
+      ...this.updateDirectoryForm.value,
+    };
 
-      this.httpService.post(formData, 'vfd/update-directory').subscribe(
-        (response) => {
-          // Handle the successful response here
-          console.log('Success:', response);
-        },
-        (error) => {
-          // Handle the error here
-          console.error('Error:', error);
-        }
-      );
-    }
+    this.httpService.post(formData, 'vfd/update-directory').subscribe(
+      (response) => {
+        // Handle the successful response here
+        console.log('Success:', response);
+      },
+      (error) => {
+        // Handle the error here
+        console.error('Error:', error);
+      }
+    );
   }
 }
