@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',

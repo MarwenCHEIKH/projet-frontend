@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http.service';
+import { HTTPService } from 'src/app/services/http-service/http.service';
+import { ModelsService } from 'src/app/services/models-service/models.service';
 
 @Component({
   selector: 'app-delete-params',
@@ -14,7 +15,7 @@ export class DeleteParamsComponent {
   modelKeys: string[] = [];
   selectedModel: any = {};
 
-  constructor(private fb: FormBuilder, private httpService: HTTPService) {
+  constructor(private fb: FormBuilder, private modelsService: ModelsService) {
     this.modelParams = this.fb.group({});
   }
 
@@ -23,7 +24,7 @@ export class DeleteParamsComponent {
   }
 
   loadModels() {
-    this.httpService.get('models/get-models').subscribe(
+    this.modelsService.getModels().subscribe(
       (response) => {
         console.log('Success:', response);
         this.models = response as any[];
@@ -74,19 +75,17 @@ export class DeleteParamsComponent {
       protocol: this.selectedModel.protocol,
       ...this.modelParams.value,
     };
-    console.log(formDataObject);
-    this.httpService
-      .post(formDataObject, 'models/delete-model-attributes')
-      .subscribe(
-        (response) => {
-          // Handle the successful response here
-          console.log('Success:', response);
-          this.loadModels();
-        },
-        (error) => {
-          // Handle the error here
-          console.log('Error:', error);
-        }
-      );
+
+    this.modelsService.deleteModelAttributes(formDataObject).subscribe(
+      (response) => {
+        // Handle the successful response here
+        console.log('Success:', response);
+        this.loadModels();
+      },
+      (error) => {
+        // Handle the error here
+        console.log('Error:', error);
+      }
+    );
   }
 }

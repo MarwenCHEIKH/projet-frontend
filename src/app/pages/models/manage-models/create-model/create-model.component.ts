@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http.service';
+import { HTTPService } from 'src/app/services/http-service/http.service';
+import { ModelsService } from 'src/app/services/models-service/models.service';
 
 @Component({
   selector: 'app-create-model',
@@ -20,7 +21,7 @@ export class CreateModelComponent {
   PHSEOptions: any;
   generalModels: any[] = [];
 
-  constructor(private fb: FormBuilder, private httpService: HTTPService) {
+  constructor(private fb: FormBuilder, private modelsService: ModelsService) {
     this.FTPOptions = this.fb.group({
       dirName: [
         '',
@@ -139,12 +140,12 @@ export class CreateModelComponent {
     this.showProtocolModel = true;
   }
   loadModels() {
-    this.httpService.get('models/get-models').subscribe(
+    this.modelsService.getModels().subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
         this.models = response as any[];
-        this.getGeneralModels();
+        this.modelsService.getGeneralModels(this.models);
       },
       (error) => {
         // Handle the error here
@@ -154,14 +155,16 @@ export class CreateModelComponent {
   }
 
   onSubmit() {
-    const formData = this.convertNumericValues(this.modelForm.value);
+    const formData = this.modelsService.convertNumericValues(
+      this.modelForm.value
+    );
     const formDataObject = {
       model_name: this.selectedModel,
       protocol: 'GENERAL',
       ...formData,
     };
 
-    this.httpService.post(formDataObject, 'models/create-model').subscribe(
+    this.modelsService.createModel(formDataObject).subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
@@ -221,7 +224,7 @@ export class CreateModelComponent {
         break;
     }
 
-    this.httpService.post(formData, 'models/create-model').subscribe(
+    this.modelsService.createModel(formData).subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
@@ -231,20 +234,5 @@ export class CreateModelComponent {
         console.error('Error:', error);
       }
     );
-  }
-
-  convertNumericValues(data: Record<string, any>): Record<string, any> {
-    const result: Record<string, any> = {};
-
-    for (const key of Object.keys(data)) {
-      const value = data[key];
-      result[key] = !isNaN(value) && value !== '' ? +value : value;
-    }
-
-    return result;
-  }
-  getGeneralModels() {
-    this.generalModels = this.models.filter((m) => m.protocol == 'GENERAL');
-    console.log(this.generalModels);
   }
 }

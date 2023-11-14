@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http.service';
+import { HTTPService } from 'src/app/services/http-service/http.service';
 
 @Component({
   selector: 'app-move-vfd',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http.service';
+import { HTTPService } from 'src/app/services/http-service/http.service';
+import { ModelsService } from 'src/app/services/models-service/models.service';
 
 @Component({
   selector: 'app-update-model',
@@ -19,7 +20,7 @@ export class UpdateModelComponent {
   PHSEOptionsForm: FormGroup;
   selectedParams: any;
 
-  constructor(private fb: FormBuilder, private httpService: HTTPService) {
+  constructor(private fb: FormBuilder, private modelsService: ModelsService) {
     this.FTPOptionsForm = this.fb.group({
       dirName: [
         '',
@@ -122,7 +123,7 @@ export class UpdateModelComponent {
   }
 
   loadModels() {
-    this.httpService.get('models/get-models').subscribe(
+    this.modelsService.getModels().subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
@@ -142,15 +143,14 @@ export class UpdateModelComponent {
     }
   }
   submitForm(formData: any, selectedModel: any) {
-    const convertedFormData = this.convertNumericValues(formData);
+    const convertedFormData = this.modelsService.convertNumericValues(formData);
 
     const formDataObject = {
       protocol: selectedModel.protocol,
       model_name: this.selectedModel.modelName,
       ...convertedFormData,
     };
-    console.log(formDataObject);
-    this.httpService.post(formDataObject, 'models/update-model').subscribe(
+    this.modelsService.updateModel(formDataObject).subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
@@ -161,16 +161,6 @@ export class UpdateModelComponent {
         console.log('Error:', error);
       }
     );
-  }
-  convertNumericValues(data: Record<string, any>): Record<string, any> {
-    const result: Record<string, any> = {};
-
-    for (const key of Object.keys(data)) {
-      const value = data[key];
-      result[key] = !isNaN(value) && value !== '' ? +value : value;
-    }
-
-    return result;
   }
 
   getFormForProtocol(protocol: string): any {

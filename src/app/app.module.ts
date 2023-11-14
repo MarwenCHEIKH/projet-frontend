@@ -28,9 +28,11 @@ import { CreateModelComponent } from './pages/models/manage-models/create-model/
 import { UpdateModelComponent } from './pages/models/manage-models/update-model/update-model.component';
 import { DeleteModelComponent } from './pages/models/manage-models/delete-model/delete-model.component';
 import { ModelsToolbarComponent } from './pages/models/models-toolbar/models-toolbar.component';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DeleteParamsComponent } from './pages/models/manage-models/update-model/delete-params/delete-params.component';
-import { RulesComponent } from './pages/rules/rules.component';
+import { ManageRulesComponent } from './pages/rules/manage-rules.component';
+import { CreateRuleComponent } from './pages/rules/manage-rules/create-rule/create-rule.component';
+import { RulesToolbarComponent } from './pages/rules/rules-toolbar/rules-toolbar/rules-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { RulesComponent } from './pages/rules/rules.component';
     ModelsToolbarComponent,
 
     DeleteParamsComponent,
-     RulesComponent,
+    ManageRulesComponent,
+    CreateRuleComponent,
+    RulesToolbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ import { RulesComponent } from './pages/rules/rules.component';
     MatToolbarModule,
     HttpClientModule,
     MatIconModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

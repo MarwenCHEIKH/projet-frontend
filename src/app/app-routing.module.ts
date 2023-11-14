@@ -14,6 +14,8 @@ import { CreateModelComponent } from './pages/models/manage-models/create-model/
 import { UpdateModelComponent } from './pages/models/manage-models/update-model/update-model.component';
 import { DeleteModelComponent } from './pages/models/manage-models/delete-model/delete-model.component';
 import { DeleteParamsComponent } from './pages/models/manage-models/update-model/delete-params/delete-params.component';
+import { ManageRulesComponent } from './pages/rules/manage-rules.component';
+import { CreateRuleComponent } from './pages/rules/manage-rules/create-rule/create-rule.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -70,6 +72,18 @@ const routes: Routes = [
       {
         path: 'delete-model',
         component: DeleteModelComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+  {
+    path: 'manage-rules',
+    component: ManageRulesComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'create-rule',
+        component: CreateRuleComponent,
         canActivate: [AuthGuard],
       },
     ],

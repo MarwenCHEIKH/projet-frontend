@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http.service';
+import { HTTPService } from 'src/app/services/http-service/http.service';
+import { ModelsService } from 'src/app/services/models-service/models.service';
 
 @Component({
   selector: 'app-delete-model',
@@ -10,12 +11,12 @@ import { HTTPService } from 'src/app/services/http.service';
 export class DeleteModelComponent {
   models: any[] = [];
   selectedModel: any = {};
-  constructor(private fb: FormBuilder, private httpService: HTTPService) {}
+  constructor(private fb: FormBuilder, private modelsService: ModelsService) {}
   ngOnInit(): void {
     this.loadModels();
   }
   loadModels() {
-    this.httpService.get('models/get-models').subscribe(
+    this.modelsService.getModels().subscribe(
       (response) => {
         console.log('Success:', response);
         this.models = response as any[];
@@ -30,8 +31,7 @@ export class DeleteModelComponent {
       model_name: this.selectedModel.modelName,
       protocol: this.selectedModel.protocol,
     };
-    console.log(formDataObject);
-    this.httpService.post(formDataObject, 'models/delete-model').subscribe(
+    this.modelsService.deleteModel(formDataObject).subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);
