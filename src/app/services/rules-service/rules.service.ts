@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HTTPService } from '../http-service/http.service';
 
 interface Argument {
   name: string;
@@ -187,7 +189,7 @@ export class RulesService {
     enum: ['=', '#', 'includes', 'excludes', '=NULL', '#NULL'],
   };
 
-  constructor() {}
+  constructor(private httpService: HTTPService) {}
   getOperatorsForArgument(argumentName: string): string[] | undefined {
     const argument = this.argumentsList.find(
       (arg) => arg.name === argumentName
@@ -201,5 +203,23 @@ export class RulesService {
 
   getArgumentNames(): string[] {
     return this.argumentsList.map((arg) => arg.name);
+  }
+  createRule(formDataObject: any): Observable<any> {
+    return this.httpService.post(formDataObject, 'rules/create-rule');
+  }
+  updateRule(formDataObject: any): Observable<any> {
+    return this.httpService.post(formDataObject, 'rules/update-rule');
+  }
+  deleteRule(formdataObject: any): Observable<any> {
+    return this.httpService.post(formdataObject, 'rules/delete-rule');
+  }
+  getRules(): Observable<any> {
+    return this.httpService.get('rules/get-rules');
+  }
+  getRuleByName(name: string): Observable<any> {
+    return this.httpService.get(`rules/get-rule?name=${name}`);
+  }
+  getRulesDetails(): Observable<any> {
+    return this.httpService.get('rules/get-rules-details');
   }
 }

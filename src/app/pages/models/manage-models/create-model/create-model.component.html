@@ -155,8 +155,8 @@
 <form *ngIf="showProtocolModel">
   <label for="modelSelect">Choose Model</label>
   <select id="modelSelect" name="modelSelect" [(ngModel)]="selectedModel">
-    <option *ngFor="let obj of generalModels" [value]="obj.model_name">
-      {{ obj.model_name }}
+    <option *ngFor="let model of generalModels" [value]="model">
+      {{ model }}
     </option>
   </select>
   <br />

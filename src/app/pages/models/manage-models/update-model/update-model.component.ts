@@ -123,7 +123,7 @@ export class UpdateModelComponent {
   }
 
   loadModels() {
-    this.modelsService.getModels().subscribe(
+    this.modelsService.getAllModels().subscribe(
       (response) => {
         // Handle the successful response here
         console.log('Success:', response);

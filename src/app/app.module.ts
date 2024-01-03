@@ -28,12 +28,38 @@ import { CreateModelComponent } from './pages/models/manage-models/create-model/
 import { UpdateModelComponent } from './pages/models/manage-models/update-model/update-model.component';
 import { DeleteModelComponent } from './pages/models/manage-models/delete-model/delete-model.component';
 import { ModelsToolbarComponent } from './pages/models/models-toolbar/models-toolbar.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDropdownModule, BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { DeleteParamsComponent } from './pages/models/manage-models/update-model/delete-params/delete-params.component';
-import { ManageRulesComponent } from './pages/rules/manage-rules.component';
-import { CreateRuleComponent } from './pages/rules/manage-rules/create-rule/create-rule.component';
-import { RulesToolbarComponent } from './pages/rules/rules-toolbar/rules-toolbar/rules-toolbar.component';
-
+import { ManageRulesComponent } from './pages/decision-rules/manage-rules.component';
+import { CreateRuleComponent } from './pages/decision-rules/manage-rules/create-rule/create-rule.component';
+import { RulesToolbarComponent } from './pages/decision-rules/rules-toolbar/rules-toolbar/rules-toolbar.component';
+import { UpdateRuleComponent } from './pages/decision-rules/manage-rules/update-rule/update-rule.component';
+import { CreateRuleTableComponent } from './pages/rule-tables/manage-rule-tables/manage-rule-tables/create-rule-table/create-rule-table.component';
+import { RuleTableToolbarComponent } from './pages/rule-tables/rule-table-toolbar/rule-table-toolbar.component';
+import { ManageRuleTablesComponent } from './pages/rule-tables/manage-rule-tables/manage-rule-tables/manage-rule-tables.component';
+import { RuleDetailsModalComponent } from './pages/rule-tables/rule-details-modal/rule-details-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { UpdateRuleTableComponent } from './pages/rule-tables/manage-rule-tables/manage-rule-tables/update-rule-table/update-rule-table.component';
+import { AlertComponent } from './components/alert-component/alert.component';
+import { ManageCgateGroupsComponent } from './pages/cgateGroups/manage-cgate-groups/manage-cgate-groups.component';
+import { CgateToolbarComponent } from './pages/cgates/cgate-toolbar/cgate-toolbar.component';
+import { CgateGroupToolbarComponent } from './pages/cgateGroups/cgateGroup-toolbar/cgateGroup-toolbar.component';
+import { CreateCgateGroupComponent } from './pages/cgateGroups/manage-cgate-groups/create-cgate-group/create-cgate-group.component';
+import { UpdateCgateGroupComponent } from './pages/cgateGroups/manage-cgate-groups/update-cgate-group/update-cgate-group.component';
+import { ManageCgatesComponent } from './pages/cgates/manage-cgates/manage-cgates.component';
+import { CreateCgateComponent } from './pages/cgates/manage-cgates/create-cgate/create-cgate.component';
+import { UpdateCgateComponent } from './pages/cgates/manage-cgates/update-cgate/update-cgate.component';
+import { SitesToolbarComponent } from './pages/sites/sites-toolbar/sites-toolbar.component';
+import { CreateLocalSiteComponent } from './pages/sites/local-sites/manage-local-sites/create-local-site/create-local-site.component';
+import { UpdateLocalSiteComponent } from './pages/sites/local-sites/manage-local-sites/update-local-site/update-local-site.component';
+import { ManageSitesComponent } from './pages/sites/manage-sites/manage-sites.component';
+import { CreateRemoteSiteComponent } from './pages/sites/remote-sites/create-remote-site/create-remote-site.component';
+import { UpdateRemoteSiteComponent } from './pages/sites/remote-sites/update-remote-site/update-remote-site.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { InformationPartenaireComponent } from './components/information-partenaire/information-partenaire.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AnnuaireComponent } from './components/annuaire/annuaire.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,11 +78,35 @@ import { RulesToolbarComponent } from './pages/rules/rules-toolbar/rules-toolbar
     UpdateModelComponent,
     DeleteModelComponent,
     ModelsToolbarComponent,
-
     DeleteParamsComponent,
     ManageRulesComponent,
     CreateRuleComponent,
     RulesToolbarComponent,
+    UpdateRuleComponent,
+    CreateRuleTableComponent,
+    RuleTableToolbarComponent,
+    ManageRuleTablesComponent,
+    RuleDetailsModalComponent,
+    UpdateRuleTableComponent,
+    AlertComponent,
+    ManageCgateGroupsComponent,
+    CgateToolbarComponent,
+    CreateCgateGroupComponent,
+    UpdateCgateGroupComponent,
+    ManageCgatesComponent,
+    CreateCgateComponent,
+    CgateGroupToolbarComponent,
+    UpdateCgateComponent,
+    SitesToolbarComponent,
+    CreateLocalSiteComponent,
+    UpdateLocalSiteComponent,
+    ManageSitesComponent,
+    CreateRemoteSiteComponent,
+    UpdateRemoteSiteComponent,
+    InformationPartenaireComponent,
+    NavbarComponent,
+    DashboardComponent,
+    AnnuaireComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,8 +123,10 @@ import { RulesToolbarComponent } from './pages/rules/rules-toolbar/rules-toolbar
     HttpClientModule,
     MatIconModule,
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
+    AgGridModule,
   ],
-  providers: [],
+  providers: [BsDropdownConfig],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

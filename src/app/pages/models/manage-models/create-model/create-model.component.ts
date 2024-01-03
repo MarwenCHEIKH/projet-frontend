@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { HTTPService } from 'src/app/services/http-service/http.service';
+
 import { ModelsService } from 'src/app/services/models-service/models.service';
 
 @Component({
@@ -10,7 +10,6 @@ import { ModelsService } from 'src/app/services/models-service/models.service';
 })
 export class CreateModelComponent {
   modelForm: any;
-  models: any[] = [];
   selectedModel!: string;
   selectedProtocol!: string;
   showGeneralModel = true;
@@ -140,15 +139,11 @@ export class CreateModelComponent {
     this.showProtocolModel = true;
   }
   loadModels() {
-    this.modelsService.getModels().subscribe(
+    this.modelsService.getModelsByProtocol('GENERAL').subscribe(
       (response) => {
-        // Handle the successful response here
-        console.log('Success:', response);
-        this.models = response as any[];
-        this.modelsService.getGeneralModels(this.models);
+        this.generalModels = response as any[];
       },
       (error) => {
-        // Handle the error here
         console.error('Error:', error);
       }
     );

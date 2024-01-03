@@ -16,7 +16,7 @@ export class DeleteModelComponent {
     this.loadModels();
   }
   loadModels() {
-    this.modelsService.getModels().subscribe(
+    this.modelsService.getAllModels().subscribe(
       (response) => {
         console.log('Success:', response);
         this.models = response as any[];

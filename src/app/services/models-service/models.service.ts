@@ -7,12 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class ModelsService {
   constructor(private httpService: HTTPService) {}
-  getModels(): Observable<any[]> {
+  getAllModels(): Observable<any[]> {
     return this.httpService.get('models/get-models');
   }
-  getGeneralModels(models: any[]) {
-    return models.filter((m) => m.protocol == 'GENERAL');
+  getModelsByProtocol(protocol: string): Observable<any[]> {
+    return this.httpService.get(`models/get-models?protocol=${protocol}`);
   }
+  getPurgeModels(): Observable<any[]> {
+    return this.httpService.get('models/get-purgeModels');
+  }
+
   createModel(formDataObject: any) {
     return this.httpService.post(formDataObject, 'models/create-model');
   }
